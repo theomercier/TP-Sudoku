@@ -21,8 +21,8 @@ namespace genetic_solver
 
         public Sudoku Solve(Sudoku s)
         {
-            //Working parameters : Pop = 1000 , ite = 500
-            return Eval(s,150,0,500);
+            //Working parameters : Pop = 5000 , ite = 100
+            return Eval(s,5000,0,100);
         }
 
         public static Sudoku Eval( Sudoku sudoku, int populationSize, double fitnessThreshold, int generationNb)
@@ -35,6 +35,9 @@ namespace genetic_solver
 
             //choix de la selection : ici elite
             var selection = new EliteSelection();
+            //var selection = new RouletteWheelSelection();
+            //var selection = new SelectionException();
+            //var selection = new TournamentSelection();
 
             //Choix du crossover : ici uniform
             var crossover = new UniformCrossover();
@@ -58,7 +61,7 @@ namespace genetic_solver
 
             ga.Start();
 
-            //recupétaion de la meilleure solution
+            //recupération de la meilleure solution
             var bestIndividual = ((ISudokuChromosome)ga.Population.BestChromosome);
             var solutions = bestIndividual.GetSudokus();
 
